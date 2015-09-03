@@ -77,6 +77,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main lab1.1.c" />
+    <ClCompile Include="mystring.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mystring.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
