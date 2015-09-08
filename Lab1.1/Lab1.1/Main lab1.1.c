@@ -11,7 +11,7 @@ int main()
 	char  pal[10] = "";
 	char  pal2[15] = "";
 	char *ppal2;
-	char *npal;
+	
 	
 	ppal2 = &pal2[0];
 
@@ -31,15 +31,13 @@ int main()
 	gets(pal);
 	printf("\n");
 
-	printf("Does theis string was palindrom? (1-Yes, 0-No): %d\n\n", ispal(pal));
+	printf("Does this string was palindrom? (1-Yes, 0-No): %d\n\n", ispal(pal));
 
 	printf("Enter your string for polindrom solution: \n");
 	gets(pal2);
 	printf("\n");
-	npal = makepal(ppal2);
 
-	printf("Your palindrom : ");
-
+	printf("Your palindrom : %s\n\n", makepal(ppal2));
 	
 	return 0;
 }

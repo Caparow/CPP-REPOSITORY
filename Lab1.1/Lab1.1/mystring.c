@@ -133,8 +133,8 @@ char* makepal(const char *st)
 {
 
 	int i, ni, k, b, n, end;
-	char nst[20]="";
-
+	static char nst[20]="";
+	
 	n = b = i = ni = k = 0;
 
 	end = pstrlen(st)-1;
@@ -166,6 +166,6 @@ char* makepal(const char *st)
 	for (i = n; i >= 0; i--)
 		nst[end+n-i] = st[i];
 
-
-	return(&nst[0]);
+	
+	return &nst;
 }
