@@ -1,0 +1,13 @@
+camera 0.8 300
+macbook 2.2 800
+ipad 0.8 300
+iphone 0.2 800
+t_shirt 0.1 100
+watch 0.1 1000
+ring 0.1 2000
+cup 0.1 10
+cap 0.08 5
+compass 0.2 300
+satnav 0.7 890
+tent 3.5 800
+medical 1.5 680

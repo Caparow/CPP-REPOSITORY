@@ -1,16 +1,22 @@
-﻿Build started 08.09.2015 21:37:50.
+﻿Build started 01.10.2015 8:34:11.
      1>Project "D:\Кепаров\CPP-REPOSITORY\Lab1.1\Lab1.1\Lab1.1.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt "Main lab1.1.c"
-         Main lab1.1.c
-     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\main lab1.1.c(19): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(254) : see declaration of 'gets'
-     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\main lab1.1.c(23): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(254) : see declaration of 'gets'
-     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\main lab1.1.c(31): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(254) : see declaration of 'gets'
-     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\main lab1.1.c(37): warning C4996: 'gets': This function or variable may be unsafe. Consider using gets_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\stdio.h(254) : see declaration of 'gets'
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt mystring.c
+         mystring.c
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(9): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(15): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(38): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(39): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(44): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(67): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(124): warning C4047: 'return' : 'char *' differs in levels of indirection from 'char (*)[20]'
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(137): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(144): warning C4047: '!=' : 'int' differs in levels of indirection from 'char [2]'
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(144): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(156): warning C4133: 'return' : incompatible types - from 'int *' to 'double *'
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(170): warning C4047: '=' : 'int *' differs in levels of indirection from 'int'
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(171): warning C4047: 'return' : 'double *' differs in levels of indirection from 'double **'
+     1>d:\кепаров\cpp-repository\lab1.1\lab1.1\mystring.c(171): warning C4172: returning address of local variable or temporary
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Кепаров\CPP-REPOSITORY\Lab1.1\Debug\Lab1.1.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Кепаров\CPP-REPOSITORY\Lab1.1\Debug\Lab1.1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Кепаров\CPP-REPOSITORY\Lab1.1\Debug\Lab1.1.lib" /MACHINE:X86 "Debug\Main lab1.1.obj"
          Debug\mystring.obj
@@ -19,4 +25,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.24
+Time Elapsed 00:00:01.06

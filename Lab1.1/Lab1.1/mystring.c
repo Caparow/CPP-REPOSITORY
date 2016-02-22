@@ -62,10 +62,9 @@ int subseq(const char *string1, const char *string2)
 
 char ispal(const char *string)
 {
-	int i, k;
-	k = 0;
+	int k;
 
-	for (i = 0; i < (strlen(string) - 1) % 2; i++)
+	for (int i = 0; i < (strlen(string)) % 2; i++)
 		if (string[i] != string[strlen(string) - i - 1])
 		{
 		    k = 0;
@@ -74,52 +73,8 @@ char ispal(const char *string)
 		else
 			k = 1;
 
-	return(k);
+	return k;
 }
-
-/*char* makepal(const char *st)
-{
-	int i, ni, k, b, n;
-	char *ste;
-	ste = st;
-	n = b = 0;
-
-	int pstrlen(char *p) {
-		int i = 0;
-		while (*p++) i++;
-		return i;
-	}
-
-	char pend(char *p, int k){
-		int i;
-		for (i = 0; i < k; i++)
-			(*p)++;
-		return 0;
-	}
-
-
-	while ((*st++) != NULL)
-	{
-		i++;
-		pend(*ste, psrtlen(*ste)-1);
-		n++;
-		if (*st == *ste )
-		{
-			while ((*st)++ == (*ste)--) && (2*b+n<pstrlen(*st)-1)
-				b++;
-		}
-		if (2*b + n == pstrlen(*st) - 1)
-			break;
-		else
-			pend(*ste, psrtlen(*ste) - 1);
-		    pend(*st, i);
-			b = 0;
-	}
-
-	for (i = 0; i <= n; i++)
-		*st+= *st[i];
-
-}*/
 
 int pstrlen(const char *p)
 {
@@ -127,7 +82,6 @@ int pstrlen(const char *p)
 	while (*p++) len++;
 	return len;
 }
-
 
 char* makepal(const char *st)
 {
@@ -168,4 +122,51 @@ char* makepal(const char *st)
 
 	
 	return &nst;
+}
+
+double* txt2double(const char *str, int *size)
+{
+	char ch;
+	int i = 0;
+	int j = 0;
+	int *ptr = NULL;
+
+
+	double *vector = (double*)malloc(0);
+
+	while (i < strlen(str))
+	{
+		char str_t[20];
+		int b = 0;
+		double num_t;
+
+		ch = str[i];
+		while ((ch != ";") && (i < strlen(str)))
+		{
+			if (((ch >= 48) && (ch<=57)) || (ch == '.'))
+			{
+				str_t[b] = ch;
+				++b;
+				++i;
+				ch = str[i];
+			}
+			else
+			{
+				size = 0;
+				return size;
+			}
+		}
+		
+		num_t = strtod(str_t, NULL);
+		vector = (double*)realloc(ptr, (j+1)*sizeof(double));
+		vector[j] = num_t;
+		++i;
+		++j;
+	}
+
+	for (int i = 0; i < j; i++)
+		printf("%f", vector[i]);
+
+	size = j;
+	return &vector;
 }
