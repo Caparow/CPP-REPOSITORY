@@ -3,6 +3,7 @@
 #include <cmath>
 #include <vector>
 #include <fstream>
+#include <functional>
 
 using namespace std;
 
@@ -12,8 +13,18 @@ const int m = 40;
 const double eps = 1e-7;
 
 typedef double(*myFunc) (const double, const int);
+typedef double(*myT) (const double);
 
-double f(const double x, int n) { return 0.025*exp(x-5)*sin(2.5*x); }
+double f(const double x) { return 0.025*exp(x-5)*sin(2.5*x); }
+double f0(double x) { return 1; }
+double f1(double x) { return x; }
+
+function<double(double)> tt(function<double(double)> f1, function<double(double)> f2) {
+	function<double(double)> f = [f1, f2](const double x) {
+		return 2*x*f2(x)-f1(x);
+	};
+	return f;
+}
 
 double T(double x, int n) {
 	if (n == 0)
@@ -33,18 +44,18 @@ double T(double x, int n) {
 	return res;
 }
 
-double integrate_cheb(const double a, const double b, const double eps, const int n_t, const int m_t, myFunc f1, myFunc f2) {
+double integrate_cheb(const double a, const double b, const double eps, function<double(double)> f1, function<double(double)> f2) {
 
 	int r = 2;
 	int n = (int)ceil(pow(eps, -1 / (double)r));
 
 	double I_n = 0, I_2n = 0;
-	I_n += ((f1(a, n_t)*f2(a, m_t))+(f1(b, n_t)*f2(b, m_t))) / 2;
+	I_n += ((f1(a)*f2(a))+(f1(b)*f2(b))) / 2;
 	double h = (b - a) / n;
 	double x = a;
 	for (int i = 1; i <= n-1 ; ++i) {
 		x += h;
-		I_n += f1(x, n_t)*f2(x, m_t);
+		I_n += f1(x)*f2(x);
 	}
 	I_2n = I_n;
 	I_n *= h;
@@ -59,7 +70,7 @@ double integrate_cheb(const double a, const double b, const double eps, const in
 		I_n = tmp;
 		double x = a + h;
 		for (int i = 1; i <= n - 1; i += 2) {
-			I_2n += f1(x, n_t)*f2(x, m_t);
+			I_2n += f1(x)*f2(x);
 			x += h + h;
 		}
 		tmp = I_2n*h;
@@ -125,17 +136,24 @@ int main() {
 	vector<double> tmp;
 	vector<double> alphas;
 	vector<double> mat_r;
+	vector<function<double(double)>> t_vec;
+	t_vec.push_back(f0);
+	t_vec.push_back(f1);
+
+	for (int i = 2; i < tmp_m; ++i)
+		t_vec.push_back(tt(t_vec[i - 2], t_vec[i - 1]));
 
 	while (delta > 0.01) {
 		delta = 0;
 		pol.clear();
+		t_vec.push_back(tt(t_vec[t_vec.size() - 2], t_vec[t_vec.size() - 1]));
 
 		if (!flag) {
 			flag = true;
 			for (int i = 0; i < tmp_m; ++i) {
 				for (int j = 0; j < tmp_m; ++j)
-					tmp.push_back(integrate_cheb(a, b, eps, i, j, T, T));
-				t_r = integrate_cheb(a, b, eps, i, i, f, T);
+					tmp.push_back(integrate_cheb(a, b, eps, t_vec[i], t_vec[j]));
+				t_r = integrate_cheb(a, b, eps, f, t_vec[i]);
 				tmp.push_back(t_r);
 				mat_r.push_back(t_r);
 				matrix.push_back(tmp);
@@ -146,8 +164,8 @@ int main() {
 			matrix.push_back(tmp);
 			for (int i = 0; i < tmp_m; ++i)
 				for (int j = matrix[i].size(); j < tmp_m; ++j)
-					matrix[i].push_back(integrate_cheb(a, b, eps, i, j, T, T));
-			mat_r.push_back(integrate_cheb(a, b, eps, tmp_m - 1, tmp_m -1, f, T));
+					matrix[i].push_back(integrate_cheb(a, b, eps, t_vec[i], t_vec[j]));
+			mat_r.push_back(integrate_cheb(a, b, eps, f, t_vec[tmp_m-1]));
 			for (int i = 0; i < tmp_m; ++i)
 				matrix[i].push_back(mat_r[i]);
 		}		
@@ -158,7 +176,7 @@ int main() {
 		for (double x = a; x <= b; x += 0.05) {
 			for (int i = 0; i < tmp_m; ++i) 
 				Pm += alphas[i] * T(x, i);
-			delta += (f(x, 0) - Pm)*(f(x, 0) - Pm);
+			delta += (f(x) - Pm)*(f(x) - Pm);
 			pol.push_back(Pm);
 			Pm = 0;
 		}
@@ -167,12 +185,12 @@ int main() {
 		cout << "m = " << tmp_m-1 << "\t delta = " << delta << endl;
 	}
 	double x = a;
-	ofstream f("output.csv");
+	ofstream file("output.csv");
 	for (int i = 0; i < pol.size(); ++i) {
-		f << x << ";" << pol[i] << endl;
+		file << x << ";" << pol[i] << endl;
 		x += 0.05;
 	}
-	f.close();
+	file.close();
 	cout << "delta= " << delta << endl;
 	return 0;
 }
